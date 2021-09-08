@@ -27,7 +27,7 @@ namespace HeistII_Oceans5
                 new Muscle { Name = "Eliot", SkillLevel = 20, PercentageCut = 12},
                 new Hacker {Name = "Kwik Tips", SkillLevel = 55, PercentageCut = 20},
                 new LockSpecialist {Name = "Randy", SkillLevel = 30, PercentageCut = 15},
-                new Muscle {Name = "Bane", SkillLevel = 40, PercentageCut = 33}
+                new Muscle {Name = "Bane", SkillLevel = 40, PercentageCut = 101}
             };
             CreateMember();
             void CreateMember()
@@ -60,17 +60,41 @@ namespace HeistII_Oceans5
                         rolodex.Add(new Muscle { Name = memberName, SkillLevel = memberSkillLevel, PercentageCut = memberPercentageCut });
                     }
                     CreateMember();
-
                 }
-                int i = -1;
-                foreach (var member in rolodex)
-                {
-                    // i++;
-                    Console.WriteLine($"{i++}, {member.Name}, {member.Specialty}, {member.SkillLevel}, {member.PercentageCut}.");
-                }
-
             }
+                
+                List<IRobber> crew = new List<IRobber>{};
 
+                
+                
+                CreateCrew();
+
+                void CreateCrew()
+                    {
+                        int TotalPercentageCut = 100;
+                        foreach (var member in crew)
+                        {
+                            TotalPercentageCut -= member.PercentageCut;
+                            Console.WriteLine($"Current Percent Cut= {TotalPercentageCut}");
+                        }
+                        int i = 1;
+                        foreach (var member in rolodex)
+                        {
+                            // if (TotalPercentageCut - member.PercentageCut < 0)
+                            // {
+                            //     rolodex.Remove(member);
+                            // }
+                            Console.WriteLine($"{i++}, {member.Name}, {member.Specialty}, {member.SkillLevel}, {member.PercentageCut}.");
+                        }
+                        Console.WriteLine("Select index value of a member you would like to join your team.");
+                        string selectedMember = Console.ReadLine();
+                        if (selectedMember != "")
+                        {
+                            crew.Add(rolodex[int.Parse(selectedMember)-1]);
+                            rolodex.RemoveAt(int.Parse(selectedMember)-1);
+                            CreateCrew();
+                        }
+                    }
 
 
 
