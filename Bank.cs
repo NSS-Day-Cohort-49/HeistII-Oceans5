@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace HeistII_Oceans5
 {
@@ -8,6 +9,7 @@ namespace HeistII_Oceans5
         public int AlarmScore { get; set; }
         public int VaultScore { get; set; }
         public int SecurityGuardScore { get; set; }
+
         public bool IsSecure
         {
             get
@@ -55,11 +57,14 @@ namespace HeistII_Oceans5
 
             }
         }
+
         public void ReconReport()
         {
         Console.WriteLine($"Most Secure: {MostSecure}");
         Console.WriteLine($"Least Secure: {LeastSecure}");
         
         }
+
+
     }
 }
